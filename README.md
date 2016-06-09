@@ -10,6 +10,6 @@ Help much appreciated.
 
 # What we aim
 
-* To have a solid library of numerical routines to generate fractals fast.
+* To have a solid library for numerical routines to generate fractals fast.
 * To have a nice user interface to explore dynamical systems properties.
-* To have fun writing beautiful software (Forget the desktop, welcome to the browser ;-)
+* To have fun writing beautiful software (Forget the desktop, welcome to the future ;-)
