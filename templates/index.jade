@@ -1,4 +1,10 @@
 extends ./base.jade
 
 block contents
-  canvas.map
+  div
+    canvas#colorMap
+  div
+    canvas.map
+
+block scripts
+  script(type="text/javascript", src="javascripts/bundle.js")

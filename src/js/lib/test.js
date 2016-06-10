@@ -3,27 +3,20 @@
 var gen = require('./quarcticFam1');
 var m = require('./matrix');
 var complex = require('./complex');
+var fractal = require('./fractal');
 
-var N = 60;
+var N = 600;
 var x = m.linspace(-4, 4, N);
 var y = m.linspace(-4, 4, N);
 
-var zx = m.vector(N*N);
-var zy = m.vector(N*N);
+//let cx = 1.134;
+//let cy = 0.2134;
 
-let cx = 1.134;
-let cy = 0.2134;
+//This map, courtesy of milnor:
+let cx = -0.765,
+    cy = 0.12;
 
 let julia = gen.juliaGen(cx, cy);
+let iters = fractal.juliaMap(julia, x, y, 16, 1000);
 
-for (var i=0; i<N; i++){
-    for (var j=0; j<N; j++){
-        let k = i + j*N,
-            zi = julia(x[i], y[j]);
-        zx[k] = zi.re,
-        zy[k] = zi.im;
-
-    }
-}
-
-console.log(zx);
+console.log(JSON.stringify(m.vectorToArray(iters)));

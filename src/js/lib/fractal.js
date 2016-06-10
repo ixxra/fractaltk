@@ -42,3 +42,7 @@ function juliaMap(fn, vectorx, vectory, inf, maxIter){
     }
     return iters;
 }
+
+module.exports = {
+    juliaMap: juliaMap
+};
