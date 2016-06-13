@@ -32,6 +32,31 @@ function fractalShow(data, canvas, palette, paletteSize, coloringFn, maxIter){
     ctx.putImageData(img, 0, 0);
 }
 
+
+/**
+Draws fractal using `cmap` insead of `palette`.
+@param cmap: Colormap as returned with `colormap`
+**/
+function fractalShowCmap(data, canvas, cmap, paletteSize, coloringFn, maxIter){
+    let ctx = canvas.getContext('2d'),
+        img = ctx.getImageData(0,0,canvas.width, canvas.height),
+        pix = img.data,
+        N = data.length;
+
+    for (let k=0; k<N; k++){
+        let offset = 4*k,
+            colorIdx = coloringFn(data[k], paletteSize, maxIter);
+        let rgb = cmap[colorIdx];
+        pix[offset] = rgb[0];
+        pix[offset+1] = rgb[1];
+        pix[offset+2] = rgb[2];
+        pix[offset+3] = 255;
+    }
+    ctx.putImageData(img, 0, 0);
+}
+
+
 module.exports = {
-    fractalShow: fractalShow
+    fractalShow: fractalShow,
+    fractalShowCmap: fractalShowCmap
 };
