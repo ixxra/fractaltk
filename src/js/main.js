@@ -22,6 +22,8 @@ function testIterate(cb){
     cb(iters);
 }
 
+
+//Going to fractal.js as `function generateIterations`;
 function testIterateWithCPlane(cPlane, cb){
     let N = 600,
         cx = -0.765,
@@ -40,15 +42,18 @@ function testIterateWithCPlane(cPlane, cb){
     cb(iters);
 }
 
+//Delete: We are using `colormap`
 function paintGradient(canvas, size, height){
     return palette.makePalette(canvas.getContext('2d'), size, height);
 }
 
+//Delete: Only `paintTest` is using it.
 function paintFractal(data, canvas, paletteInst){
     let paletteSize = paletteInst.r.length;
     plot.fractalShow(data, canvas, paletteInst, paletteSize, palette.linearIndex, 1000);
 }
 
+//Delete: Using `paintTestCmap` instead.
 function paintTest(gradCanvas, mapCanvas){
     mapCanvas.width = 600;
     mapCanvas.height = 600;
@@ -58,12 +63,15 @@ function paintTest(gradCanvas, mapCanvas){
     });
 }
 
+
+//Going to plot.js
 function canvasCoordsToPlaneCoords(canvas, x, y, cPlane){
     let xPlane = cPlane.xmin + x*cPlane.width/canvas.width;
     let yPlane = cPlane.ymin + y*cPlane.height/canvas.height;
     return {x: xPlane, y: yPlane};
 }
 
+//Going to plot.js
 function mapRectangleToCPlane(canvas, x, y, rectW, rectH, cPlane){
     let factorX = rectW/canvas.width,
         factorY = rectH/canvas.height,
@@ -108,7 +116,7 @@ function moveRectangleCPlane(cPlane, canvas, rectangle){
     });
 }
 
-
+//Delete: Using `paintTestCmapCPlane` instead
 function paintTestCmap(canvas, cb){
     let paletteSize = 256;
     canvas.width = 600;
