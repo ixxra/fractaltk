@@ -55,8 +55,46 @@ function fractalShowCmap(data, canvas, cmap, paletteSize, coloringFn, maxIter){
     ctx.putImageData(img, 0, 0);
 }
 
+/**
+Converts canvas coordinates to complex plane coordinates.
+@param canvas: `canvas` element.
+@params x, y: (x, y) coordinates in canvas.
+@param cPlane: Complex plane structure.
+@return: Coordinates object.
+**/
+function canvasCoordsToPlaneCoords(canvas, x, y, cPlane){
+    let xPlane = cPlane.xmin + x*cPlane.width/canvas.width;
+    let yPlane = cPlane.ymin + y*cPlane.height/canvas.height;
+    return {x: xPlane, y: yPlane};
+}
+
+
+/**
+Maps a subrectangle in canvas to complex plane coordinates.
+@param canvas: canvas element.
+@params (x, y): Rectangle center coordinates.
+@params (rectW, rectH): Rectangle's width and height.
+@param cPlane: Complex plane object.
+@return: New complex plane object.
+**/
+function mapRectangleToCPlane(canvas, x, y, rectW, rectH, cPlane){
+    let factorX = rectW/canvas.width,
+        factorY = rectH/canvas.height,
+        zoomFactor = Math.min(factorX, factorY),
+        coords = canvasCoordsToPlaneCoords(canvas, x, y, cPlane),
+        deltaX = cPlane.width*zoomFactor,
+        deltaY = cPlane.height*zoomFactor;
+
+    return {
+        xmin: coords.x - deltaX/2,
+        ymin: coords.y - deltaY/2,
+        width: deltaX,
+        height: deltaY
+    };
+}
 
 module.exports = {
     fractalShow: fractalShow,
-    fractalShowCmap: fractalShowCmap
+    fractalShowCmap: fractalShowCmap,
+    mapRectangleToCPlane: mapRectangleToCPlane
 };
